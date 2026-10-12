@@ -47,4 +47,263 @@ $('addTask').onclick=()=>{TASKS.push({id:'custom_'+newItemId(),title:'新任务'
 function completedDates(){return Object.keys(state).filter(s=>/^\d{4}-\d\d-\d\d$/.test(s)&&iso(fromISO(s))===s&&dayComplete(fromISO(s))&&s<=iso(today)).sort()};function renderHistory(){let dates=completedDates();$('totalDays').textContent=dates.length;let st=0,cur=new Date(today);if(!dayComplete(cur))cur.setDate(cur.getDate()-1);while(dayComplete(cur)&&st<10000){st++;cur.setDate(cur.getDate()-1)}$('streak').textContent=st;$('monthTitle').textContent=`${month.getFullYear()}年${month.getMonth()+1}月`;$('calendarLabel').textContent=`${month.getFullYear()} / ${month.getMonth()+1}`;$('calendar').innerHTML='';for(let i=0;i<(month.getDay()+6)%7;i++){$('calendar').append(document.createElement('div'))}const nd=new Date(month.getFullYear(),month.getMonth()+1,0).getDate();for(let n=1;n<=nd;n++){const d=new Date(month.getFullYear(),month.getMonth(),n,12),b=document.createElement('button');b.textContent=n;b.className=(dayComplete(d)&&iso(d)<=iso(today)?'done ':'')+(iso(d)===iso(viewed)?'sel':'');b.onclick=()=>{viewed=d;switchPage('today')};$('calendar').append(b)}}function switchPage(page){$('editor').classList.add('hidden');$('cards').classList.remove('hidden');$('reward').classList.remove('hidden');$('editTasks').classList.remove('hidden');$('todayPage').classList.toggle('hidden',page!=='today');$('historyPage').classList.toggle('hidden',page!=='history');$('weightPage').classList.toggle('hidden',page!=='weight');document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='history')renderHistory();else if(page==='weight')renderWeight();else renderDay();window.scrollTo(0,0)}document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.page)));$('prevMonth').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);renderHistory()};$('nextMonth').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);renderHistory()};$('export').onclick=()=>{const blob=new Blob([JSON.stringify({app:'daily-growth',version:4,exportedAt:new Date().toISOString(),records:state,tasks:TASKS,weights:weights},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='每日成长备份-'+iso(today)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.app!=='daily-growth'||![1,2,3,4].includes(obj.version)||!obj.records||typeof obj.records!=='object'||Array.isArray(obj.records))throw Error('文件格式不正确');if(!confirm('导入备份将覆盖当前打卡记录，是否继续？'))return;state=obj.records;if(Array.isArray(obj.tasks)&&obj.tasks.some(x=>x.id==='exercise')){TASKS=clone(obj.tasks);normalizeTasks();migrateRecords(state);saveTasks()}if(obj.weights&&typeof obj.weights==='object'&&!Array.isArray(obj.weights)){weights=obj.weights;saveWeights()}migrateRecords(state);save();renderDay();renderHistory();renderWeight();alert('导入成功')}catch(err){alert('导入失败：'+err.message)}finally{e.target.value=''}};function renderWeight(){const entries=Object.entries(weights).filter(([d,v])=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Number(v))&&Number(v)>=15&&Number(v)<=400).sort((a,b)=>a[0].localeCompare(b[0]));const latest=entries.at(-1),first=entries[0];$('weightLatest').textContent=latest?Number(latest[1]).toFixed(1):'—';$('weightChange').textContent=latest&&first?(Number(latest[1])-Number(first[1])).toFixed(1):'—';let range=$('weightRange').value;let shown=entries;if(range!=='all'){const cutoff=new Date(today);cutoff.setDate(today.getDate()-(Number(range)-1));shown=entries.filter(([d])=>d>=iso(cutoff)&&d<=iso(today))}const target=$('weightChart');target.innerHTML='';if(!shown.length){target.innerHTML='<p class="small">暂无该时间范围内的体重记录。添加记录后这里会出现曲线。</p>'}else{let vals=shown.map(x=>Number(x[1]));let low=Math.floor((Math.min(...vals)-1)*2)/2,high=Math.ceil((Math.max(...vals)+1)*2)/2;if(high<=low)high=low+2;const W=340,H=220,L=43,R=16,T=20,B=39;const dates=shown.map(x=>Date.parse(x[0]+'T12:00:00'));let minX=Math.min(...dates),maxX=Math.max(...dates);const x=(k)=>minX===maxX?W/2:L+(k-minX)/(maxX-minX)*(W-L-R);const y=(v)=>T+(high-v)/(high-low)*(H-T-B);const ns='http://www.w3.org/2000/svg';const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('role','img');svg.setAttribute('aria-label','体重趋势折线图');svg.classList.add('weight-graph');const node=(tag,attrs,content)=>{let z=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>z.setAttribute(k,v));if(content!==undefined)z.textContent=content;svg.append(z);return z};for(let i=0;i<5;i++){let v=low+(high-low)*i/4;node('line',{x1:L,y1:y(v),x2:W-R,y2:y(v),class:'chart-grid'});node('text',{x:L-6,y:y(v)+4,'text-anchor':'end',class:'chart-label'},v.toFixed(1))}const path=shown.map(([d,v],i)=>`${i?'L':'M'}${x(dates[i]).toFixed(1)},${y(Number(v)).toFixed(1)}`).join(' ');if(shown.length>1)node('path',{d:path,fill:'none',stroke:'#20a87c','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});shown.forEach(([d,v],i)=>{const c=node('circle',{cx:x(dates[i]),cy:y(Number(v)),r:4.5,class:'weight-dot'});const title=document.createElementNS(ns,'title');title.textContent=`${d}：${Number(v).toFixed(1)} kg`;c.append(title)});node('text',{x:x(minX),y:H-10,'text-anchor':minX===maxX?'middle':'start',class:'chart-label'},shown[0][0].slice(5));if(shown.length>1)node('text',{x:x(maxX),y:H-10,'text-anchor':'end',class:'chart-label'},shown.at(-1)[0].slice(5));target.append(svg)}const list=$('weightList');list.innerHTML='';if(!entries.length){list.innerHTML='<p class="small">还没有体重记录。</p>'}else{entries.slice().reverse().forEach(([d,v])=>{const row=document.createElement('div');row.className='weight-item';const tx=document.createElement('span');tx.textContent=`${d}  ·  ${Number(v).toFixed(1)} kg`;const b=document.createElement('button');b.textContent='删除';b.onclick=()=>{if(confirm('删除 '+d+' 的体重记录？')){delete weights[d];saveWeights();renderWeight()}};row.append(tx,b);list.append(row)})}}
 $('weightDate').value=iso(today);$('weightDate').max=iso(today);$('saveWeight').onclick=()=>{const date=$('weightDate').value,val=Number($('weightValue').value);if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||date>iso(today)){alert('请选择今天或之前的有效日期');return}if(!$('weightValue').value.trim()||!Number.isFinite(val)||val<15||val>400){alert('请输入15～400之间的有效体重（kg）');return}weights[date]=Math.round(val*10)/10;saveWeights();$('weightValue').value='';renderWeight()};$('weightRange').onchange=renderWeight;
 renderDay();if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
+
+// 每日成长：独立任务编辑修复补丁
+// 将本段完整代码放在 index.html 最后一个 </script> 之前
+
+(() => {
+  let lastDeleted = null;
+
+  function createId() {
+    return "custom_" + Date.now().toString(36)
+      + "_" + Math.random().toString(36).slice(2);
+  }
+
+  function backupForUndo() {
+    lastDeleted = {
+      tasks: JSON.parse(JSON.stringify(TASKS)),
+      records: JSON.parse(JSON.stringify(state))
+    };
+  }
+
+  // 防止不同任务共用同一个任务 ID
+  function ensureUniqueTaskIds() {
+    const used = new Set();
+
+    TASKS.forEach(task => {
+      if (!task.id || used.has(task.id)) {
+        task.id = createId();
+      }
+      used.add(task.id);
+
+      if (!Array.isArray(task.items)) {
+        task.items = [];
+      }
+    });
+  }
+
+  function saveEditorChanges() {
+    ensureUniqueTaskIds();
+    saveTasks();
+  }
+
+  function removeOneSubtask(task, index) {
+    if (index < 0 || index >= task.items.length) return;
+    if (task.items.length <= 1) {
+      alert("每个任务至少保留一个子任务");
+      return;
+    }
+
+    const name = task.items[index][0];
+
+    if (!confirm("确定只删除「" + name + "」吗？")) {
+      return;
+    }
+
+    backupForUndo();
+
+    // 只删除数组中指定位置的一个元素
+    task.items.splice(index, 1);
+
+    // 兼容旧版按序号保存的打卡记录
+    // 删除中间子任务后，将后面的勾选状态向前移动
+    Object.values(state).forEach(day => {
+      const record = day?.[task.id];
+      if (!record || typeof record !== "object") return;
+
+      const oldLength = task.items.length + 1;
+
+      for (let i = index; i < oldLength - 1; i++) {
+        const next = Object.prototype.hasOwnProperty.call(
+          record, String(i + 1)
+        ) ? record[i + 1] : false;
+
+        record[i] = next;
+      }
+
+      delete record[oldLength - 1];
+    });
+
+    save();
+    saveEditorChanges();
+    renderEditor();
+  }
+
+  function undoLastDeletion() {
+    if (!lastDeleted) return;
+
+    TASKS = JSON.parse(JSON.stringify(lastDeleted.tasks));
+    state = JSON.parse(JSON.stringify(lastDeleted.records));
+
+    lastDeleted = null;
+
+    save();
+    saveEditorChanges();
+    renderEditor();
+  }
+
+  function makeButton(text, handler, danger = false) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = danger ? "edit-btn danger" : "edit-btn";
+    button.textContent = text;
+    button.addEventListener("click", handler);
+    return button;
+  }
+
+  // 覆盖旧版编辑器，确保每个按钮操作独立
+  renderEditor = function () {
+    ensureUniqueTaskIds();
+
+    const host = document.getElementById("editorList");
+    host.replaceChildren();
+
+    const tip = document.createElement("p");
+    tip.className = "settings-tip";
+    tip.textContent =
+      "每次仅修改或删除选中的项目，其他任务保持不变。";
+    host.append(tip);
+
+    if (lastDeleted) {
+      const undo = makeButton(
+        "↶ 撤销上一次删除",
+        undoLastDeletion
+      );
+      undo.style.marginBottom = "12px";
+      host.append(undo);
+    }
+
+    TASKS.forEach(task => {
+      const card = document.createElement("div");
+      card.className = "editor-card";
+
+      const heading = document.createElement("div");
+      heading.className = "section-row";
+
+      const title = document.createElement("strong");
+      title.textContent = task.icon + " " + task.title;
+
+      const deleteTask = makeButton(
+        "删除任务",
+        () => {
+          const index = TASKS.indexOf(task);
+          if (index < 0) return;
+
+          if (task.id === "exercise") {
+            alert("运动是每日必做任务，不能删除");
+            return;
+          }
+
+          if (!confirm(
+            "确定只删除任务「" + task.title + "」吗？"
+          )) return;
+
+          backupForUndo();
+          TASKS.splice(index, 1);
+          saveEditorChanges();
+          renderEditor();
+        },
+        true
+      );
+
+      deleteTask.disabled = task.id === "exercise";
+      heading.append(title, deleteTask);
+      card.append(heading);
+
+      const taskName = document.createElement("input");
+      taskName.className = "editor-field";
+      taskName.value = task.title;
+      taskName.placeholder = "任务名称";
+
+      taskName.addEventListener("change", () => {
+        if (!TASKS.includes(task)) return;
+
+        const value = taskName.value.trim();
+        if (!value) {
+          taskName.value = task.title;
+          return;
+        }
+
+        task.title = value;
+        title.textContent = task.icon + " " + task.title;
+        saveEditorChanges();
+      });
+
+      card.append(taskName);
+
+      task.items.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "editor-row";
+
+        const input = document.createElement("input");
+        input.value = item[0];
+        input.placeholder = "子任务名称";
+
+        input.addEventListener("change", () => {
+          if (!TASKS.includes(task)) return;
+          if (!task.items.includes(item)) return;
+
+          const value = input.value.trim();
+          if (!value) {
+            input.value = item[0];
+            return;
+          }
+
+          // 精确修改当前子任务
+          item[0] = value;
+          saveEditorChanges();
+        });
+
+        const deleteItem = makeButton(
+          "删除",
+          () => {
+            if (!TASKS.includes(task)) return;
+
+            // 使用元素身份定位，而不是旧的循环序号
+            const index = task.items.indexOf(item);
+            removeOneSubtask(task, index);
+          },
+          true
+        );
+
+        deleteItem.disabled = task.items.length <= 1;
+
+        row.append(input, deleteItem);
+        card.append(row);
+      });
+
+      const addItem = makeButton(
+        "＋ 添加子任务",
+        () => {
+          if (!TASKS.includes(task)) return;
+
+          // 创建独立数组，不复用已有子任务
+          task.items.push(["新子任务", 0, createId()]);
+          saveEditorChanges();
+          renderEditor();
+        }
+      );
+
+      card.append(addItem);
+      host.append(card);
+    });
+  };
+
+  // 替换旧版添加任务按钮的行为
+  document.getElementById("addTask").onclick = () => {
+    TASKS.push({
+      id: createId(),
+      title: "新任务",
+      icon: "⭐",
+      items: [["第一项", 0, createId()]]
+    });
+
+    saveEditorChanges();
+    renderEditor();
+  };
+
+  ensureUniqueTaskIds();
+  saveEditorChanges();
+})();
+
 </script></body></html>
