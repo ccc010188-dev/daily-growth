@@ -1,5 +1,4 @@
-
-const CACHE = "daily-growth-editor-fix-20261012";
+const CACHE = "daily-growth-isolated-days-v5-20261012";
 
 const FILES = [
   "./",
@@ -19,12 +18,15 @@ self.addEventListener("install", event => {
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(key => key !== CACHE)
-          .map(key => caches.delete(key))
+    caches.keys()
+      .then(keys =>
+        Promise.all(
+          keys
+            .filter(key => key !== CACHE)
+            .map(key => caches.delete(key))
+        )
       )
-    ).then(() => self.clients.claim())
+      .then(() => self.clients.claim())
   );
 });
 
@@ -41,9 +43,11 @@ self.addEventListener("fetch", event => {
         if (response.ok) {
           const copy = response.clone();
 
-          caches.open(CACHE)
-            .then(cache => cache.put(event.request, copy))
-            .catch(() => {});
+          event.waitUntil(
+            caches.open(CACHE)
+              .then(cache => cache.put(event.request, copy))
+              .catch(() => {})
+          );
         }
 
         return response;
