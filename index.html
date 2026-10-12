@@ -1,309 +1,1010 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#15283c"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="每日成长"><meta name="description" content="每日成长打卡：运动、吉他、单片机、科研和英语。"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png"><title>每日成长 V4</title><style>
-:root{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif;color:#203248;background:#f4f6fa;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}main{max-width:620px;margin:auto;padding-bottom:105px}.hero{background:linear-gradient(145deg,#172a45,#284c5e);color:white;padding:calc(env(safe-area-inset-top) + 26px) 22px 27px;border-radius:0 0 28px 28px}.small{font-size:13px;color:#718195}.hero .small{color:#bdcbd8}.hero h1{margin:9px 0 7px;font-size:30px}.hero-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.hero-pct{font-size:34px;font-weight:800}.bar{height:9px;border-radius:20px;background:#e3e9f0;overflow:hidden}.bar span{display:block;height:100%;background:#34b385;transition:width .25s}.hero .bar{background:#526479}.content{padding:18px 16px}.weekstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:15px 0 20px}.day{border:none;background:white;border-radius:13px;padding:10px 0;color:#6b7d8e;box-shadow:0 1px 4px #12263a10}.day b{display:block;font-size:17px;color:#233b52;margin-top:7px}.day.active{background:#234b63;color:white}.day.active b{color:white}.dot{display:block;background:#cbd4de;width:5px;height:5px;border-radius:50%;margin:6px auto 0}.day.completed .dot{background:#2dbb85}.section-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}h2{margin:0;font-size:20px}.card{background:white;border:1px solid #eaf0f4;border-radius:19px;padding:17px;margin:12px 0;box-shadow:0 5px 20px #172f4610}.head{display:flex;align-items:center;gap:11px}.ico{font-size:21px;width:42px;height:42px;display:grid;place-items:center;background:#eaf5f0;border-radius:12px}.grow{flex:1}.head strong{font-size:17px}.minutes{font-size:12px;color:#7b8c9d;margin-top:4px}.tag{font-size:12px;background:#edf2f6;border-radius:40px;padding:6px 9px;color:#5c7184}.tag.success{background:#e2f7ed;color:#15805a}.mini{height:5px;margin:13px 0 10px}.task{display:flex;align-items:center;gap:12px;padding:10px 2px;border-top:1px solid #f2f5f7;font-size:14px;min-height:45px}.task input{appearance:none;width:23px;height:23px;border:2px solid #c4d0da;border-radius:8px;flex:none;margin:0;position:relative}.task input:checked{border-color:#20ad80;background:#20ad80}.task input:checked:after{content:'✓';position:absolute;color:white;top:-2px;left:3px;font-size:17px;font-weight:700}.task .label{flex:1}.task input:checked+.label{color:#91a1a9;text-decoration:line-through}.task .time{font-size:12px;color:#96a3ad}.bonus{border:1px dashed #ccd6df}.notice{padding:13px;border-radius:12px;background:#e7f6ef;color:#25795c;margin:10px 0 16px;font-size:14px}.bottom{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid #e3eaf0;padding:11px 15px calc(env(safe-area-inset-bottom) + 11px);display:flex;justify-content:center;gap:10px;z-index:2}.nav{width:min(200px,42vw);border:0;background:transparent;color:#8190a0;padding:6px 10px;font-size:13px}.nav b{display:block;font-size:20px;margin-bottom:4px}.nav.active{color:#167d5d}.action{background:#1b8064;color:white;border:none;border-radius:12px;padding:12px 15px;font-weight:650}.outline{background:white;color:#235b6a;border:1px solid #cddce3}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{background:white;border-radius:18px;padding:17px}.stat big{display:block;font-size:27px;font-weight:750;margin:8px 0}.history{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.history button{height:42px;border-radius:12px;border:0;background:#edf2f5;color:#637687}.history button.done{background:#b6ead4;color:#11583e}.history button.sel{outline:2px solid #176b59}.muted{color:#81909e;font-size:12px}.hidden{display:none!important}footer{text-align:center;font-size:12px;color:#8596a5;margin:25px 0}.tools{display:flex;flex-wrap:wrap;gap:10px}input[type=file]{display:none}.edit-btn{background:#edf5f1;color:#14684f;border:0;border-radius:10px;padding:8px 12px;font-size:13px}.editor-field{display:block;width:100%;border:1px solid #d5e0e8;border-radius:12px;padding:12px;margin:8px 0 14px;background:white;color:#203248}.editor-row{display:flex;align-items:center;gap:8px;margin:9px 0}.editor-row input{flex:1;min-width:0;border:1px solid #d5e0e8;border-radius:10px;padding:10px}.danger{color:#be4d4d}.editor-card{border:1px solid #e4edf1;padding:12px;border-radius:14px;margin:12px 0}.mini-actions{display:flex;justify-content:space-between;gap:8px}.settings-tip{font-size:12px;color:#718195;line-height:1.6}.weight-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.weight-form label{font-size:13px;color:#65798b}.weight-form input{width:100%;margin-top:6px;border-radius:11px;border:1px solid #cfdae3;padding:11px;background:#fff;color:#203248}.weight-graph{width:100%;display:block;overflow:visible}.weight-dot{fill:#20a87c;stroke:white;stroke-width:2}.chart-label{font-size:11px;fill:#718195}.chart-grid{stroke:#dce6e8;stroke-width:1}.nav{flex:1;width:auto;max-width:200px}.chart-note{font-size:12px;color:#718195;line-height:1.7}.weight-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1f4}.weight-item button{border:0;background:#fff0ef;color:#ad4d4d;border-radius:8px;padding:7px 11px}
-</style></head><body><main><header class="hero"><div class="hero-row"><div><div class="small" id="dateLabel"></div><h1>每日成长 🌱</h1><div class="small" id="quote">每天进步一点点</div></div><div class="hero-pct" id="percent">0%</div></div><div style="margin-top:22px" class="bar"><span id="heroBar" style="width:0%"></span></div><div class="small" style="margin-top:9px" id="progressText">今天还未开始</div></header><div class="content"><section id="todayPage"><div class="weekstrip" id="weekStrip"></div><div class="section-row"><h2 id="sectionTitle">今天的任务</h2><button class="edit-btn" id="editTasks">⚙ 编辑任务</button></div><div id="cards"></div><div id="reward"></div><div id="editor" class="hidden card"><div class="section-row"><h2>自定义任务</h2><button class="edit-btn" id="closeEditor">完成编辑</button></div><p class="settings-tip">每项任务独立编辑，可添加、删除子任务。更改后自动保存；已有勾选记录不会因为列表位置改变而错位。周末仅「运动」为必做，其他任务均为可选。</p><div id="editorList"></div><button class="action" id="addTask">＋ 添加任务</button></div><footer>每一次勾选，都是在为未来的自己积累力量 ✨</footer></section><section id="weightPage" class="hidden"><div class="section-row"><h2>⚖️ 体重记录</h2><span class="small">单位 kg</span></div><div class="card"><strong>记录体重</strong><p class="small">每天记录一次，可补录过去日期；同一天保存会更新原记录。</p><div class="weight-form"><label>日期<input id="weightDate" type="date"></label><label>体重 (kg)<input id="weightValue" type="number" inputmode="decimal" min="15" max="400" step="0.1" placeholder="例如 65.5"></label></div><button style="margin-top:14px;width:100%" class="action" id="saveWeight">保存今天的体重</button></div><div class="stats"><div class="stat"><span class="small">最新体重</span><big id="weightLatest">—</big><span class="muted">kg</span></div><div class="stat"><span class="small">与首次记录相比</span><big id="weightChange">—</big><span class="muted">kg · 负数为下降</span></div></div><div class="card"><div class="section-row"><strong>体重变化曲线</strong><select id="weightRange" class="edit-btn" aria-label="趋势时间范围"><option value="7">近7天</option><option value="30" selected>近30天</option><option value="all">全部</option></select></div><div id="weightChart"></div><p class="chart-note">仅连接已记录的日期；未记录日期不补值。纵坐标为体重（kg）。</p></div><div class="card"><strong>历史体重</strong><div id="weightList"></div></div><footer>体重记录只保存在这台设备上，可在「成长记录」中导出备份。</footer></section><section id="historyPage" class="hidden"><div class="section-row"><h2>成长记录</h2><span class="small" id="monthTitle"></span></div><div class="stats"><div class="stat"><span class="small">累计达标天数</span><big id="totalDays">0</big><span class="muted">天</span></div><div class="stat"><span class="small">连续打卡</span><big id="streak">0</big><span class="muted">天</span></div></div><div class="card"><div class="section-row"><button class="outline action" id="prevMonth">‹</button><strong id="calendarLabel"></strong><button class="outline action" id="nextMonth">›</button></div><div class="history" id="calendar"></div><p class="muted">绿色表示当日必做项目已全部完成；点击日期查看当天记录。</p></div><div class="card"><strong>数据管理</strong><p class="small">数据仅保存在当前设备浏览器中。建议每周导出一次备份；换手机时可导入。</p><div class="tools"><button class="action" id="export">导出备份</button><label class="action outline" for="importFile">导入备份</label><input type="file" accept="application/json,.json" id="importFile"/></div></div><div class="card"><strong>安装到 iPhone 主屏幕</strong><p class="small">Safari 打开已部署的 HTTPS 网址 → 分享 → 添加到主屏幕 → 添加。离线使用前请至少联网打开一次。</p></div><footer>数据不会上传到服务器，请妥善保存备份文件。</footer></section></div></main><nav class="bottom"><button class="nav active" data-page="today"><b>☑</b>每日打卡</button><button class="nav" data-page="weight"><b>⚖</b>体重趋势</button><button class="nav" data-page="history"><b>▦</b>成长记录</button></nav><script>
-const DEFAULT_TASKS=[{id:'exercise',title:'运动',icon:'🏃',items:[['热身与关节活动',5],['有氧或力量训练',20],['拉伸放松',5]]},{id:'guitar',title:'吉他',icon:'🎸',items:[['爬格子与音阶',10],['和弦与节奏训练',10],['歌曲练习',10]]},{id:'mcu',title:'单片机',icon:'💻',items:[['技术原理学习',30],['代码与技术手册阅读',30],['编程实践和调试',30],['技术总结与复盘',30]]},{id:'research',title:'科研',icon:'🔬',items:[['阅读论文',30],['学习模型和理论',30],['实验与数据分析',30],['整理成果与科研写作',30]]},{id:'words',title:'背单词',icon:'📚',items:[['复习旧单词',10],['学习新单词',15],['记忆自测',5]]}];
-const clone=x=>JSON.parse(JSON.stringify(x));
-const newItemId=()=> 'sub_'+(typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+'_'+Math.random().toString(36).slice(2));
-let TASKS=clone(DEFAULT_TASKS);
-try{const t=JSON.parse(localStorage.getItem('daily_growth_tasks_v2')||'null');if(Array.isArray(t)&&t.length&&t.some(x=>x.id==='exercise'))TASKS=t}catch(e){}
-// 为每一条子任务分配永久标识；不再以数组下标代表其身份。
-function normalizeTasks(){TASKS.forEach(t=>{if(!Array.isArray(t.items))t.items=[];t.items=t.items.map(it=>Array.isArray(it)?[String(it[0]??''),Number(it[1])||0,typeof it[2]==='string'&&it[2]?it[2]:newItemId()]:[String(it?.name||'新子任务'),Number(it?.minutes)||0,typeof it?.id==='string'&&it.id?it.id:newItemId()])})}
-normalizeTasks();
-// 迁移旧版以 0、1、2… 为键的勾选记录。保留旧字段，以便旧备份仍可使用。
-function migrateRecords(records){for(const entry of Object.values(records||{})){if(!entry||typeof entry!=='object')continue;TASKS.forEach(t=>{const check=entry[t.id];if(!check||typeof check!=='object')return;t.items.forEach((it,i)=>{if(!Object.prototype.hasOwnProperty.call(check,it[2])&&Object.prototype.hasOwnProperty.call(check,i))check[it[2]]=check[i]===true})})}}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#15283c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="每日成长">
+<meta name="description" content="每日成长打卡：运动、吉他、单片机、科研和英语。">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>每日成长 V5</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif;color:#203248;background:#f4f6fa;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0}
+button,input{font:inherit}
+button{cursor:pointer}
+main{max-width:620px;margin:auto;padding-bottom:105px}
+.hero{background:linear-gradient(145deg,#172a45,#284c5e);color:white;padding:calc(env(safe-area-inset-top) + 26px) 22px 27px;border-radius:0 0 28px 28px}
+.small{font-size:13px;color:#718195}
+.hero .small{color:#bdcbd8}
+.hero h1{margin:9px 0 7px;font-size:30px}
+.hero-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.hero-pct{font-size:34px;font-weight:800}
+.bar{height:9px;border-radius:20px;background:#e3e9f0;overflow:hidden}
+.bar span{display:block;height:100%;background:#34b385;transition:width .25s}
+.hero .bar{background:#526479}
+.content{padding:18px 16px}
+.weekstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:15px 0 20px}
+.day{border:none;background:white;border-radius:13px;padding:10px 0;color:#6b7d8e;box-shadow:0 1px 4px #12263a10}
+.day b{display:block;font-size:17px;color:#233b52;margin-top:7px}
+.day.active{background:#234b63;color:white}
+.day.active b{color:white}
+.dot{display:block;background:#cbd4de;width:5px;height:5px;border-radius:50%;margin:6px auto 0}
+.day.completed .dot{background:#2dbb85}
+.section-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+h2{margin:0;font-size:20px}
+.card{background:white;border:1px solid #eaf0f4;border-radius:19px;padding:17px;margin:12px 0;box-shadow:0 5px 20px #172f4610}
+.head{display:flex;align-items:center;gap:11px}
+.ico{font-size:21px;width:42px;height:42px;display:grid;place-items:center;background:#eaf5f0;border-radius:12px}
+.grow{flex:1}
+.head strong{font-size:17px}
+.minutes{font-size:12px;color:#7b8c9d;margin-top:4px}
+.tag{font-size:12px;background:#edf2f6;border-radius:40px;padding:6px 9px;color:#5c7184}
+.tag.success{background:#e2f7ed;color:#15805a}
+.mini{height:5px;margin:13px 0 10px}
+.task{display:flex;align-items:center;gap:12px;padding:10px 2px;border-top:1px solid #f2f5f7;font-size:14px;min-height:45px}
+.task input{appearance:none;width:23px;height:23px;border:2px solid #c4d0da;border-radius:8px;flex:none;margin:0;position:relative}
+.task input:checked{border-color:#20ad80;background:#20ad80}
+.task input:checked:after{content:'✓';position:absolute;color:white;top:-2px;left:3px;font-size:17px;font-weight:700}
+.task .label{flex:1}
+.task input:checked+.label{color:#91a1a9;text-decoration:line-through}
+.task .time{font-size:12px;color:#96a3ad}
+.bonus{border:1px dashed #ccd6df}
+.notice{padding:13px;border-radius:12px;background:#e7f6ef;color:#25795c;margin:10px 0 16px;font-size:14px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid #e3eaf0;padding:11px 15px calc(env(safe-area-inset-bottom) + 11px);display:flex;justify-content:center;gap:10px;z-index:2}
+.nav{flex:1;width:auto;max-width:200px;border:0;background:transparent;color:#8190a0;padding:6px 10px;font-size:13px}
+.nav b{display:block;font-size:20px;margin-bottom:4px}
+.nav.active{color:#167d5d}
+.action{background:#1b8064;color:white;border:none;border-radius:12px;padding:12px 15px;font-weight:650}
+.outline{background:white;color:#235b6a;border:1px solid #cddce3}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:white;border-radius:18px;padding:17px}
+.stat big{display:block;font-size:27px;font-weight:750;margin:8px 0}
+.history{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.history button{height:42px;border-radius:12px;border:0;background:#edf2f5;color:#637687}
+.history button.done{background:#b6ead4;color:#11583e}
+.history button.sel{outline:2px solid #176b59}
+.muted{color:#81909e;font-size:12px}
+.hidden{display:none!important}
+footer{text-align:center;font-size:12px;color:#8596a5;margin:25px 0}
+.tools{display:flex;flex-wrap:wrap;gap:10px}
+input[type=file]{display:none}
+.edit-btn{background:#edf5f1;color:#14684f;border:0;border-radius:10px;padding:8px 12px;font-size:13px}
+.editor-field{display:block;width:100%;border:1px solid #d5e0e8;border-radius:12px;padding:12px;margin:8px 0 14px;background:white;color:#203248}
+.editor-row{display:flex;align-items:center;gap:8px;margin:9px 0}
+.editor-row input{flex:1;min-width:0;border:1px solid #d5e0e8;border-radius:10px;padding:10px}
+.danger{color:#be4d4d}
+.editor-card{border:1px solid #e4edf1;padding:12px;border-radius:14px;margin:12px 0}
+.mini-actions{display:flex;justify-content:space-between;gap:8px}
+.settings-tip{font-size:12px;color:#718195;line-height:1.6}
+.weight-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.weight-form label{font-size:13px;color:#65798b}
+.weight-form input{width:100%;margin-top:6px;border-radius:11px;border:1px solid #cfdae3;padding:11px;background:#fff;color:#203248}
+.weight-graph{width:100%;display:block;overflow:visible}
+.weight-dot{fill:#20a87c;stroke:white;stroke-width:2}
+.chart-label{font-size:11px;fill:#718195}
+.chart-grid{stroke:#dce6e8;stroke-width:1}
+.chart-note{font-size:12px;color:#718195;line-height:1.7}
+.weight-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1f4}
+.weight-item button{border:0;background:#fff0ef;color:#ad4d4d;border-radius:8px;padding:7px 11px}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="hero-row">
+      <div>
+        <div class="small" id="dateLabel"></div>
+        <h1>每日成长 🌱</h1>
+        <div class="small" id="quote">每天进步一点点</div>
+      </div>
+      <div class="hero-pct" id="percent">0%</div>
+    </div>
+    <div style="margin-top:22px" class="bar">
+      <span id="heroBar" style="width:0%"></span>
+    </div>
+    <div class="small" style="margin-top:9px" id="progressText">今天还未开始</div>
+  </header>
 
-const saveTasks=()=>{localStorage.setItem('daily_growth_tasks_v2',JSON.stringify(TASKS));renderDay()};
-const $=id=>document.getElementById(id);const today=new Date();today.setHours(12,0,0,0);let viewed=new Date(today), month=new Date(today.getFullYear(),today.getMonth(),1);const iso=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');const fromISO=s=>new Date(s+'T12:00:00');let state={};try{const v=JSON.parse(localStorage.getItem('daily_growth_v1')||'{}');if(v&&typeof v==='object'&&!Array.isArray(v))state=v}catch(e){}let weights={};try{const w=JSON.parse(localStorage.getItem('daily_growth_weights_v1')||'{}');if(w&&typeof w==='object'&&!Array.isArray(w))weights=w}catch(e){}const saveWeights=()=>{try{localStorage.setItem('daily_growth_weights_v1',JSON.stringify(weights))}catch(e){alert('保存体重失败，请检查设备空间')}};const save=()=>{try{localStorage.setItem('daily_growth_v1',JSON.stringify(state))}catch(e){alert('保存失败，请检查浏览器存储空间')}};migrateRecords(state);save();const weekend=d=>[0,6].includes(d.getDay());const req=d=>weekend(d)?TASKS.filter(t=>t.id==='exercise'):TASKS;const complete=(d,t)=>t.items.length>0&&t.items.every(it=>state[iso(d)]?.[t.id]?.[it[2]]===true);const dayComplete=d=>req(d).every(t=>complete(d,t));const doneCount=(d,t)=>t.items.reduce((s,it)=>s+(state[iso(d)]?.[t.id]?.[it[2]]===true?1:0),0);const fmt=d=>new Intl.DateTimeFormat('zh-CN',{month:'long',day:'numeric',weekday:'long'}).format(d);
-function renderDay(){const d=viewed, weekStart=new Date(d);weekStart.setDate(d.getDate()-(d.getDay()+6)%7);$('dateLabel').textContent=fmt(d);const required=req(d);const done=required.reduce((s,t)=>s+doneCount(d,t),0),total=required.reduce((s,t)=>s+t.items.length,0),pct=total?Math.round(100*done/total):0;$('percent').textContent=pct+'%';$('heroBar').style.width=pct+'%';$('progressText').textContent=dayComplete(d)?'完成度 100% · 今日达标 🎉':`今日完成度 ${pct}% · 继续加油！`;$('sectionTitle').textContent=iso(d)===iso(today)?'今天的任务':'这一天的任务';$('weekStrip').innerHTML='';for(let i=0;i<7;i++){const day=new Date(weekStart);day.setDate(weekStart.getDate()+i);const b=document.createElement('button');b.className='day'+(iso(day)===iso(d)?' active':'')+(dayComplete(day)?' completed':'');b.innerHTML=`${['一','二','三','四','五','六','日'][i]}<b>${day.getDate()}</b><span class="dot"></span>`;b.onclick=()=>{viewed=day;renderDay()};$('weekStrip').append(b)}$('cards').innerHTML='';TASKS.forEach(t=>{const optional=weekend(d)&&t.id!=='exercise',sum=t.items.length,progress=doneCount(d,t),pctTask=sum?Math.round(progress/sum*100):0,section=document.createElement('section');section.className='card'+(optional?' bonus':'');section.innerHTML=`<div class="head"><div class="ico">${t.icon}</div><div class="grow"><strong>${t.title}</strong><div class="minutes">完成度 ${pctTask}%</div></div><span class="tag ${complete(d,t)?'success':''}">${complete(d,t)?'✓ 已完成':optional?'自由加练':'必做'}</span></div><div class="bar mini"><span style="width:${pctTask}%"></span></div>`;t.items.forEach(([name,min],i)=>{const label=document.createElement('label');label.className='task';const input=document.createElement('input');input.type='checkbox';input.checked=state[iso(d)]?.[t.id]?.[t.items[i][2]]===true;input.onchange=()=>{state[iso(d)]??={};state[iso(d)][t.id]??={};state[iso(d)][t.id][t.items[i][2]]=input.checked;save();renderDay()};const tx=document.createElement('span');tx.className='label';tx.textContent=name;const time=document.createElement('span');time.className='time';time.textContent='';label.append(input,tx,time);section.append(label)});$('cards').append(section)});$('reward').innerHTML=dayComplete(d)?'<div class="notice">🏆 今天的必做任务全部完成！给自己一个小奖励吧。</div>':''}
+  <div class="content">
+    <section id="todayPage">
+      <div class="weekstrip" id="weekStrip"></div>
+      <div class="section-row">
+        <h2 id="sectionTitle">今天的任务</h2>
+        <button class="edit-btn" id="editTasks">⚙ 编辑任务</button>
+      </div>
+      <div id="cards"></div>
+      <div id="reward"></div>
+      <div id="editor" class="hidden card">
+        <div class="section-row">
+          <h2>自定义任务</h2>
+          <button class="edit-btn" id="closeEditor">完成编辑</button>
+        </div>
+        <p class="settings-tip">所有任务都可以编辑或删除，子任务可以全部删除。更改仅对正在查看的日期生效。</p>
+        <div id="editorList"></div>
+        <button class="action" id="addTask">＋ 添加任务</button>
+      </div>
+      <footer>每一次勾选，都是在为未来的自己积累力量 ✨</footer>
+    </section>
 
-function renderEditor(){
- const host=$('editorList');host.innerHTML='';
- TASKS.forEach(task=>{
-  const taskId=task.id;
-  const c=document.createElement('div');c.className='editor-card';
-  const head=document.createElement('div');head.className='section-row';
-  const strong=document.createElement('strong');strong.textContent=task.icon+' '+task.title;
-  const remove=document.createElement('button');remove.className='edit-btn danger';remove.textContent='删除任务';remove.disabled=taskId==='exercise';
-  remove.onclick=()=>{if(!confirm('确定删除该任务？历史打卡记录不会清除。'))return;TASKS=TASKS.filter(x=>x.id!==taskId);saveTasks();renderEditor()};
-  head.append(strong,remove);c.append(head);
-  const name=document.createElement('input');name.className='editor-field';name.value=task.title;name.placeholder='任务名称';name.setAttribute('aria-label','任务名称');
-  name.onchange=()=>{const current=TASKS.find(x=>x.id===taskId);if(!current)return;current.title=name.value.trim()||current.title;name.value=current.title;strong.textContent=current.icon+' '+current.title;saveTasks()};c.append(name);
-  task.items.forEach(item=>{
-   const itemId=item[2],row=document.createElement('div');row.className='editor-row';
-   const input=document.createElement('input');input.value=item[0];input.setAttribute('aria-label','子任务名称');
-   input.onchange=()=>{const current=TASKS.find(x=>x.id===taskId)?.items.find(x=>x[2]===itemId);if(!current)return;current[0]=input.value.trim()||current[0];input.value=current[0];saveTasks()};
-   const del=document.createElement('button');del.className='edit-btn danger';del.textContent='删除';del.disabled=task.items.length<=1;
-   del.onclick=()=>{const current=TASKS.find(x=>x.id===taskId);if(!current||current.items.length<=1)return;if(!confirm('删除这条子任务？其他任务及历史打卡不会错位。'))return;current.items=current.items.filter(x=>x[2]!==itemId);saveTasks();renderEditor()};
-   row.append(input,del);c.append(row)
-  });
-  const plus=document.createElement('button');plus.className='edit-btn';plus.textContent='＋ 添加子任务';
-  plus.onclick=()=>{const current=TASKS.find(x=>x.id===taskId);if(!current)return;current.items.push(['新子任务',0,newItemId()]);saveTasks();renderEditor()};
-  c.append(plus);host.append(c)
- })
+    <section id="weightPage" class="hidden">
+      <div class="section-row">
+        <h2>⚖️ 体重记录</h2>
+        <span class="small">单位 kg</span>
+      </div>
+      <div class="card">
+        <strong>记录体重</strong>
+        <p class="small">每天记录一次，可补录过去日期；同一天保存会更新原记录。</p>
+        <div class="weight-form">
+          <label>日期<input id="weightDate" type="date"></label>
+          <label>体重 (kg)<input id="weightValue" type="number" inputmode="decimal" min="15" max="400" step="0.1" placeholder="例如 65.5"></label>
+        </div>
+        <button style="margin-top:14px;width:100%" class="action" id="saveWeight">保存今天的体重</button>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span class="small">最新体重</span>
+          <big id="weightLatest">—</big>
+          <span class="muted">kg</span>
+        </div>
+        <div class="stat">
+          <span class="small">与首次记录相比</span>
+          <big id="weightChange">—</big>
+          <span class="muted">kg · 负数为下降</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-row">
+          <strong>体重变化曲线</strong>
+          <select id="weightRange" class="edit-btn" aria-label="趋势时间范围">
+            <option value="7">近7天</option>
+            <option value="30" selected>近30天</option>
+            <option value="all">全部</option>
+          </select>
+        </div>
+        <div id="weightChart"></div>
+        <p class="chart-note">仅连接已记录的日期；未记录日期不补值。纵坐标为体重（kg）。</p>
+      </div>
+      <div class="card">
+        <strong>历史体重</strong>
+        <div id="weightList"></div>
+      </div>
+      <footer>体重记录只保存在这台设备上，可在「成长记录」中导出备份。</footer>
+    </section>
+
+    <section id="historyPage" class="hidden">
+      <div class="section-row">
+        <h2>成长记录</h2>
+        <span class="small" id="monthTitle"></span>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span class="small">累计达标天数</span>
+          <big id="totalDays">0</big>
+          <span class="muted">天</span>
+        </div>
+        <div class="stat">
+          <span class="small">连续打卡</span>
+          <big id="streak">0</big>
+          <span class="muted">天</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-row">
+          <button class="outline action" id="prevMonth">‹</button>
+          <strong id="calendarLabel"></strong>
+          <button class="outline action" id="nextMonth">›</button>
+        </div>
+        <div class="history" id="calendar"></div>
+        <p class="muted">绿色表示当日必做项目已全部完成；点击日期查看当天记录。</p>
+      </div>
+      <div class="card">
+        <strong>数据管理</strong>
+        <p class="small">数据仅保存在当前设备浏览器中。建议每周导出一次备份；换手机时可导入。</p>
+        <div class="tools">
+          <button class="action" id="export">导出备份</button>
+          <label class="action outline" for="importFile">导入备份</label>
+          <input type="file" accept="application/json,.json" id="importFile">
+        </div>
+      </div>
+      <div class="card">
+        <strong>安装到 iPhone 主屏幕</strong>
+        <p class="small">Safari 打开已部署的 HTTPS 网址 → 分享 → 添加到主屏幕 → 添加。离线使用前请至少联网打开一次。</p>
+      </div>
+      <footer>数据不会上传到服务器，请妥善保存备份文件。</footer>
+    </section>
+  </div>
+</main>
+
+<nav class="bottom">
+  <button class="nav active" data-page="today"><b>☑</b>每日打卡</button>
+  <button class="nav" data-page="weight"><b>⚖</b>体重趋势</button>
+  <button class="nav" data-page="history"><b>▦</b>成长记录</button>
+</nav>
+
+<script>
+const DEFAULT_TASKS = [
+  {id:'exercise',title:'运动',icon:'🏃',items:[
+    ['热身与关节活动',5],['有氧或力量训练',20],['拉伸放松',5]
+  ]},
+  {id:'guitar',title:'吉他',icon:'🎸',items:[
+    ['爬格子与音阶',10],['和弦与节奏训练',10],['歌曲练习',10]
+  ]},
+  {id:'mcu',title:'单片机',icon:'💻',items:[
+    ['技术原理学习',30],['代码与技术手册阅读',30],
+    ['编程实践和调试',30],['技术总结与复盘',30]
+  ]},
+  {id:'research',title:'科研',icon:'🔬',items:[
+    ['阅读论文',30],['学习模型和理论',30],
+    ['实验与数据分析',30],['整理成果与科研写作',30]
+  ]},
+  {id:'words',title:'背单词',icon:'📚',items:[
+    ['复习旧单词',10],['学习新单词',15],['记忆自测',5]
+  ]}
+];
+
+const clone = x => JSON.parse(JSON.stringify(x));
+
+function tasksForDate(d) {
+  return window.dailyGrowthDayTasks?.[iso(d)] ?? TASKS;
 }
-$('editTasks').onclick=()=>{$('editor').classList.remove('hidden');$('cards').classList.add('hidden');$('reward').classList.add('hidden');$('editTasks').classList.add('hidden');renderEditor()};
-$('closeEditor').onclick=()=>{$('editor').classList.add('hidden');$('cards').classList.remove('hidden');$('reward').classList.remove('hidden');$('editTasks').classList.remove('hidden');renderDay()};
-$('addTask').onclick=()=>{TASKS.push({id:'custom_'+newItemId(),title:'新任务',icon:'⭐',items:[['第一项',0,newItemId()]]});saveTasks();renderEditor()};
-function completedDates(){return Object.keys(state).filter(s=>/^\d{4}-\d\d-\d\d$/.test(s)&&iso(fromISO(s))===s&&dayComplete(fromISO(s))&&s<=iso(today)).sort()};function renderHistory(){let dates=completedDates();$('totalDays').textContent=dates.length;let st=0,cur=new Date(today);if(!dayComplete(cur))cur.setDate(cur.getDate()-1);while(dayComplete(cur)&&st<10000){st++;cur.setDate(cur.getDate()-1)}$('streak').textContent=st;$('monthTitle').textContent=`${month.getFullYear()}年${month.getMonth()+1}月`;$('calendarLabel').textContent=`${month.getFullYear()} / ${month.getMonth()+1}`;$('calendar').innerHTML='';for(let i=0;i<(month.getDay()+6)%7;i++){$('calendar').append(document.createElement('div'))}const nd=new Date(month.getFullYear(),month.getMonth()+1,0).getDate();for(let n=1;n<=nd;n++){const d=new Date(month.getFullYear(),month.getMonth(),n,12),b=document.createElement('button');b.textContent=n;b.className=(dayComplete(d)&&iso(d)<=iso(today)?'done ':'')+(iso(d)===iso(viewed)?'sel':'');b.onclick=()=>{viewed=d;switchPage('today')};$('calendar').append(b)}}function switchPage(page){$('editor').classList.add('hidden');$('cards').classList.remove('hidden');$('reward').classList.remove('hidden');$('editTasks').classList.remove('hidden');$('todayPage').classList.toggle('hidden',page!=='today');$('historyPage').classList.toggle('hidden',page!=='history');$('weightPage').classList.toggle('hidden',page!=='weight');document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='history')renderHistory();else if(page==='weight')renderWeight();else renderDay();window.scrollTo(0,0)}document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.page)));$('prevMonth').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);renderHistory()};$('nextMonth').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);renderHistory()};$('export').onclick=()=>{const blob=new Blob([JSON.stringify({app:'daily-growth',version:4,exportedAt:new Date().toISOString(),records:state,tasks:TASKS,weights:weights},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='每日成长备份-'+iso(today)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.app!=='daily-growth'||![1,2,3,4].includes(obj.version)||!obj.records||typeof obj.records!=='object'||Array.isArray(obj.records))throw Error('文件格式不正确');if(!confirm('导入备份将覆盖当前打卡记录，是否继续？'))return;state=obj.records;if(Array.isArray(obj.tasks)&&obj.tasks.some(x=>x.id==='exercise')){TASKS=clone(obj.tasks);normalizeTasks();migrateRecords(state);saveTasks()}if(obj.weights&&typeof obj.weights==='object'&&!Array.isArray(obj.weights)){weights=obj.weights;saveWeights()}migrateRecords(state);save();renderDay();renderHistory();renderWeight();alert('导入成功')}catch(err){alert('导入失败：'+err.message)}finally{e.target.value=''}};function renderWeight(){const entries=Object.entries(weights).filter(([d,v])=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Number(v))&&Number(v)>=15&&Number(v)<=400).sort((a,b)=>a[0].localeCompare(b[0]));const latest=entries.at(-1),first=entries[0];$('weightLatest').textContent=latest?Number(latest[1]).toFixed(1):'—';$('weightChange').textContent=latest&&first?(Number(latest[1])-Number(first[1])).toFixed(1):'—';let range=$('weightRange').value;let shown=entries;if(range!=='all'){const cutoff=new Date(today);cutoff.setDate(today.getDate()-(Number(range)-1));shown=entries.filter(([d])=>d>=iso(cutoff)&&d<=iso(today))}const target=$('weightChart');target.innerHTML='';if(!shown.length){target.innerHTML='<p class="small">暂无该时间范围内的体重记录。添加记录后这里会出现曲线。</p>'}else{let vals=shown.map(x=>Number(x[1]));let low=Math.floor((Math.min(...vals)-1)*2)/2,high=Math.ceil((Math.max(...vals)+1)*2)/2;if(high<=low)high=low+2;const W=340,H=220,L=43,R=16,T=20,B=39;const dates=shown.map(x=>Date.parse(x[0]+'T12:00:00'));let minX=Math.min(...dates),maxX=Math.max(...dates);const x=(k)=>minX===maxX?W/2:L+(k-minX)/(maxX-minX)*(W-L-R);const y=(v)=>T+(high-v)/(high-low)*(H-T-B);const ns='http://www.w3.org/2000/svg';const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('role','img');svg.setAttribute('aria-label','体重趋势折线图');svg.classList.add('weight-graph');const node=(tag,attrs,content)=>{let z=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>z.setAttribute(k,v));if(content!==undefined)z.textContent=content;svg.append(z);return z};for(let i=0;i<5;i++){let v=low+(high-low)*i/4;node('line',{x1:L,y1:y(v),x2:W-R,y2:y(v),class:'chart-grid'});node('text',{x:L-6,y:y(v)+4,'text-anchor':'end',class:'chart-label'},v.toFixed(1))}const path=shown.map(([d,v],i)=>`${i?'L':'M'}${x(dates[i]).toFixed(1)},${y(Number(v)).toFixed(1)}`).join(' ');if(shown.length>1)node('path',{d:path,fill:'none',stroke:'#20a87c','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});shown.forEach(([d,v],i)=>{const c=node('circle',{cx:x(dates[i]),cy:y(Number(v)),r:4.5,class:'weight-dot'});const title=document.createElementNS(ns,'title');title.textContent=`${d}：${Number(v).toFixed(1)} kg`;c.append(title)});node('text',{x:x(minX),y:H-10,'text-anchor':minX===maxX?'middle':'start',class:'chart-label'},shown[0][0].slice(5));if(shown.length>1)node('text',{x:x(maxX),y:H-10,'text-anchor':'end',class:'chart-label'},shown.at(-1)[0].slice(5));target.append(svg)}const list=$('weightList');list.innerHTML='';if(!entries.length){list.innerHTML='<p class="small">还没有体重记录。</p>'}else{entries.slice().reverse().forEach(([d,v])=>{const row=document.createElement('div');row.className='weight-item';const tx=document.createElement('span');tx.textContent=`${d}  ·  ${Number(v).toFixed(1)} kg`;const b=document.createElement('button');b.textContent='删除';b.onclick=()=>{if(confirm('删除 '+d+' 的体重记录？')){delete weights[d];saveWeights();renderWeight()}};row.append(tx,b);list.append(row)})}}
-$('weightDate').value=iso(today);$('weightDate').max=iso(today);$('saveWeight').onclick=()=>{const date=$('weightDate').value,val=Number($('weightValue').value);if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||date>iso(today)){alert('请选择今天或之前的有效日期');return}if(!$('weightValue').value.trim()||!Number.isFinite(val)||val<15||val>400){alert('请输入15～400之间的有效体重（kg）');return}weights[date]=Math.round(val*10)/10;saveWeights();$('weightValue').value='';renderWeight()};$('weightRange').onchange=renderWeight;
-renderDay();if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
 
-// 每日成长：独立任务编辑修复补丁
-// 将本段完整代码放在 index.html 最后一个 </script> 之前
+const newItemId = () => 'sub_' + (
+  typeof crypto !== 'undefined' && crypto.randomUUID
+    ? crypto.randomUUID()
+    : Date.now().toString(36) + '_' + Math.random().toString(36).slice(2)
+);
 
-(() => {
-  let lastDeleted = null;
+let TASKS = clone(DEFAULT_TASKS);
 
-  function createId() {
-    return "custom_" + Date.now().toString(36)
-      + "_" + Math.random().toString(36).slice(2);
+try {
+  const t = JSON.parse(localStorage.getItem('daily_growth_tasks_v2') || 'null');
+  if (Array.isArray(t) && t.length && t.some(x => x.id === 'exercise')) TASKS = t;
+} catch(e) {}
+
+// 子任务使用永久标识，删除或添加不会导致其他勾选错位。
+function normalizeTasks() {
+  TASKS.forEach(t => {
+    if (!Array.isArray(t.items)) t.items = [];
+    t.items = t.items.map(it => Array.isArray(it)
+      ? [
+          String(it[0] ?? ''),
+          Number(it[1]) || 0,
+          typeof it[2] === 'string' && it[2] ? it[2] : newItemId()
+        ]
+      : [
+          String(it?.name || '新子任务'),
+          Number(it?.minutes) || 0,
+          typeof it?.id === 'string' && it.id ? it.id : newItemId()
+        ]
+    );
+  });
+}
+normalizeTasks();
+
+// 兼容旧版按序号保存的勾选记录。
+function migrateRecords(records) {
+  for (const entry of Object.values(records || {})) {
+    if (!entry || typeof entry !== 'object') continue;
+    TASKS.forEach(t => {
+      const check = entry[t.id];
+      if (!check || typeof check !== 'object') return;
+      t.items.forEach((it, i) => {
+        if (!Object.prototype.hasOwnProperty.call(check, it[2]) &&
+            Object.prototype.hasOwnProperty.call(check, i)) {
+          check[it[2]] = check[i] === true;
+        }
+      });
+    });
   }
+}
 
-  function backupForUndo() {
-    lastDeleted = {
-      tasks: JSON.parse(JSON.stringify(TASKS)),
-      records: JSON.parse(JSON.stringify(state))
+const $ = id => document.getElementById(id);
+const today = new Date();
+today.setHours(12,0,0,0);
+
+let viewed = new Date(today);
+let month = new Date(today.getFullYear(), today.getMonth(), 1);
+
+const iso = d => [
+  d.getFullYear(),
+  String(d.getMonth()+1).padStart(2,'0'),
+  String(d.getDate()).padStart(2,'0')
+].join('-');
+
+const fromISO = s => new Date(s + 'T12:00:00');
+
+let state = {};
+try {
+  const v = JSON.parse(localStorage.getItem('daily_growth_v1') || '{}');
+  if (v && typeof v === 'object' && !Array.isArray(v)) state = v;
+} catch(e) {}
+
+let weights = {};
+try {
+  const w = JSON.parse(localStorage.getItem('daily_growth_weights_v1') || '{}');
+  if (w && typeof w === 'object' && !Array.isArray(w)) weights = w;
+} catch(e) {}
+
+const saveWeights = () => {
+  try {
+    localStorage.setItem('daily_growth_weights_v1', JSON.stringify(weights));
+  } catch(e) {
+    alert('保存体重失败，请检查设备空间');
+  }
+};
+
+const save = () => {
+  try {
+    localStorage.setItem('daily_growth_v1', JSON.stringify(state));
+  } catch(e) {
+    alert('保存失败，请检查浏览器存储空间');
+  }
+};
+
+migrateRecords(state);
+save();
+
+const weekend = d => [0,6].includes(d.getDay());
+
+// 保留原来的周末规则：运动必做，其他项目可选。
+const req = d => weekend(d)
+  ? tasksForDate(d).filter(t => t.id === 'exercise')
+  : tasksForDate(d);
+
+const complete = (d,t) => t.items.length > 0 &&
+  t.items.every(it => state[iso(d)]?.[t.id]?.[it[2]] === true);
+
+const dayComplete = d => req(d).length > 0 &&
+  req(d).every(t => complete(d,t));
+
+const doneCount = (d,t) => t.items.reduce(
+  (s,it) => s + (state[iso(d)]?.[t.id]?.[it[2]] === true ? 1 : 0), 0
+);
+
+const fmt = d => new Intl.DateTimeFormat('zh-CN', {
+  month:'long',day:'numeric',weekday:'long'
+}).format(d);
+
+function renderDay() {
+  const d = viewed;
+  const weekStart = new Date(d);
+  weekStart.setDate(d.getDate() - (d.getDay()+6)%7);
+
+  $('dateLabel').textContent = fmt(d);
+
+  const required = req(d);
+  const done = required.reduce((s,t) => s + doneCount(d,t), 0);
+  const total = required.reduce((s,t) => s + t.items.length, 0);
+  const pct = total ? Math.round(100*done/total) : 0;
+
+  $('percent').textContent = pct + '%';
+  $('heroBar').style.width = pct + '%';
+  $('progressText').textContent = dayComplete(d)
+    ? '完成度 100% · 今日达标 🎉'
+    : `今日完成度 ${pct}% · 继续加油！`;
+
+  $('sectionTitle').textContent = iso(d) === iso(today)
+    ? '今天的任务' : '这一天的任务';
+
+  $('weekStrip').innerHTML = '';
+
+  for (let i=0;i<7;i++) {
+    const day = new Date(weekStart);
+    day.setDate(weekStart.getDate()+i);
+
+    const b = document.createElement('button');
+    b.className = 'day' +
+      (iso(day) === iso(d) ? ' active' : '') +
+      (dayComplete(day) ? ' completed' : '');
+
+    b.innerHTML = `${['一','二','三','四','五','六','日'][i]}<b>${day.getDate()}</b><span class="dot"></span>`;
+    b.onclick = () => {
+      viewed = day;
+      renderDay();
     };
+    $('weekStrip').append(b);
   }
 
-  // 防止不同任务共用同一个任务 ID
-  function ensureUniqueTaskIds() {
-    const used = new Set();
+  $('cards').innerHTML = '';
 
-    TASKS.forEach(task => {
-      if (!task.id || used.has(task.id)) {
-        task.id = createId();
-      }
-      used.add(task.id);
+  tasksForDate(d).forEach(t => {
+    const optional = weekend(d) && t.id !== 'exercise';
+    const sum = t.items.length;
+    const progress = doneCount(d,t);
+    const pctTask = sum ? Math.round(progress/sum*100) : 0;
 
-      if (!Array.isArray(task.items)) {
-        task.items = [];
-      }
+    const section = document.createElement('section');
+    section.className = 'card' + (optional ? ' bonus' : '');
+
+    const head = document.createElement('div');
+    head.className = 'head';
+
+    const icon = document.createElement('div');
+    icon.className = 'ico';
+    icon.textContent = t.icon;
+
+    const grow = document.createElement('div');
+    grow.className = 'grow';
+
+    const title = document.createElement('strong');
+    title.textContent = t.title;
+
+    const minutes = document.createElement('div');
+    minutes.className = 'minutes';
+    minutes.textContent = '完成度 ' + pctTask + '%';
+
+    grow.append(title, minutes);
+
+    const tag = document.createElement('span');
+    tag.className = 'tag' + (complete(d,t) ? ' success' : '');
+    tag.textContent = complete(d,t)
+      ? '✓ 已完成' : optional ? '自由加练' : '必做';
+
+    head.append(icon, grow, tag);
+    section.append(head);
+
+    const bar = document.createElement('div');
+    bar.className = 'bar mini';
+    const fill = document.createElement('span');
+    fill.style.width = pctTask + '%';
+    bar.append(fill);
+    section.append(bar);
+
+    t.items.forEach(item => {
+      const label = document.createElement('label');
+      label.className = 'task';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = state[iso(d)]?.[t.id]?.[item[2]] === true;
+
+      input.onchange = () => {
+        state[iso(d)] ??= {};
+        state[iso(d)][t.id] ??= {};
+        state[iso(d)][t.id][item[2]] = input.checked;
+        save();
+        renderDay();
+      };
+
+      const tx = document.createElement('span');
+      tx.className = 'label';
+      tx.textContent = item[0];
+
+      const time = document.createElement('span');
+      time.className = 'time';
+
+      label.append(input,tx,time);
+      section.append(label);
     });
+
+    $('cards').append(section);
+  });
+
+  $('reward').innerHTML = dayComplete(d)
+    ? '<div class="notice">🏆 今天的必做任务全部完成！给自己一个小奖励吧。</div>'
+    : '';
+}
+
+let renderEditor;
+
+$('editTasks').onclick = () => {
+  $('editor').classList.remove('hidden');
+  $('cards').classList.add('hidden');
+  $('reward').classList.add('hidden');
+  $('editTasks').classList.add('hidden');
+  renderEditor();
+};
+
+$('closeEditor').onclick = () => {
+  $('editor').classList.add('hidden');
+  $('cards').classList.remove('hidden');
+  $('reward').classList.remove('hidden');
+  $('editTasks').classList.remove('hidden');
+  renderDay();
+};
+
+function completedDates() {
+  return Object.keys(state).filter(s =>
+    /^\d{4}-\d\d-\d\d$/.test(s) &&
+    iso(fromISO(s)) === s &&
+    dayComplete(fromISO(s)) &&
+    s <= iso(today)
+  ).sort();
+}
+
+function renderHistory() {
+  const dates = completedDates();
+  $('totalDays').textContent = dates.length;
+
+  let st = 0;
+  const cur = new Date(today);
+  if (!dayComplete(cur)) cur.setDate(cur.getDate()-1);
+
+  while (dayComplete(cur) && st < 10000) {
+    st++;
+    cur.setDate(cur.getDate()-1);
   }
 
-  function saveEditorChanges() {
-    ensureUniqueTaskIds();
-    saveTasks();
+  $('streak').textContent = st;
+  $('monthTitle').textContent = `${month.getFullYear()}年${month.getMonth()+1}月`;
+  $('calendarLabel').textContent = `${month.getFullYear()} / ${month.getMonth()+1}`;
+  $('calendar').innerHTML = '';
+
+  for (let i=0;i<(month.getDay()+6)%7;i++) {
+    $('calendar').append(document.createElement('div'));
   }
 
-  function removeOneSubtask(task, index) {
-    if (index < 0 || index >= task.items.length) return;
-    if (task.items.length <= 1) {
-      alert("每个任务至少保留一个子任务");
-      return;
+  const nd = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
+
+  for (let n=1;n<=nd;n++) {
+    const d = new Date(month.getFullYear(),month.getMonth(),n,12);
+    const b = document.createElement('button');
+    b.textContent = n;
+    b.className = (dayComplete(d) && iso(d)<=iso(today) ? 'done ' : '') +
+      (iso(d)===iso(viewed) ? 'sel' : '');
+    b.onclick = () => {
+      viewed = d;
+      switchPage('today');
+    };
+    $('calendar').append(b);
+  }
+}
+
+function switchPage(page) {
+  $('editor').classList.add('hidden');
+  $('cards').classList.remove('hidden');
+  $('reward').classList.remove('hidden');
+  $('editTasks').classList.remove('hidden');
+
+  $('todayPage').classList.toggle('hidden',page!=='today');
+  $('historyPage').classList.toggle('hidden',page!=='history');
+  $('weightPage').classList.toggle('hidden',page!=='weight');
+
+  document.querySelectorAll('.nav').forEach(b =>
+    b.classList.toggle('active',b.dataset.page===page)
+  );
+
+  if (page==='history') renderHistory();
+  else if (page==='weight') renderWeight();
+  else renderDay();
+
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('.nav').forEach(b =>
+  b.addEventListener('click',() => switchPage(b.dataset.page))
+);
+
+$('prevMonth').onclick = () => {
+  month = new Date(month.getFullYear(),month.getMonth()-1,1);
+  renderHistory();
+};
+
+$('nextMonth').onclick = () => {
+  month = new Date(month.getFullYear(),month.getMonth()+1,1);
+  renderHistory();
+};
+
+function renderWeight() {
+  const entries = Object.entries(weights).filter(([d,v]) =>
+    /^\d{4}-\d{2}-\d{2}$/.test(d) &&
+    Number.isFinite(Number(v)) &&
+    Number(v)>=15 && Number(v)<=400
+  ).sort((a,b) => a[0].localeCompare(b[0]));
+
+  const latest = entries.at(-1);
+  const first = entries[0];
+
+  $('weightLatest').textContent = latest ? Number(latest[1]).toFixed(1) : '—';
+  $('weightChange').textContent = latest && first
+    ? (Number(latest[1])-Number(first[1])).toFixed(1) : '—';
+
+  const range = $('weightRange').value;
+  let shown = entries;
+
+  if (range!=='all') {
+    const cutoff = new Date(today);
+    cutoff.setDate(today.getDate()-(Number(range)-1));
+    shown = entries.filter(([d]) => d>=iso(cutoff) && d<=iso(today));
+  }
+
+  const target = $('weightChart');
+  target.innerHTML = '';
+
+  if (!shown.length) {
+    target.innerHTML = '<p class="small">暂无该时间范围内的体重记录。添加记录后这里会出现曲线。</p>';
+  } else {
+    const vals = shown.map(x => Number(x[1]));
+    const low = Math.floor((Math.min(...vals)-1)*2)/2;
+    let high = Math.ceil((Math.max(...vals)+1)*2)/2;
+    if (high<=low) high = low+2;
+
+    const W=340,H=220,L=43,R=16,T=20,B=39;
+    const dates = shown.map(x => Date.parse(x[0]+'T12:00:00'));
+    const minX = Math.min(...dates);
+    const maxX = Math.max(...dates);
+
+    const x = k => minX===maxX
+      ? W/2 : L+(k-minX)/(maxX-minX)*(W-L-R);
+
+    const y = v => T+(high-v)/(high-low)*(H-T-B);
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns,'svg');
+
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    svg.setAttribute('role','img');
+    svg.setAttribute('aria-label','体重趋势折线图');
+    svg.classList.add('weight-graph');
+
+    const node = (tag,attrs,content) => {
+      const z = document.createElementNS(ns,tag);
+      Object.entries(attrs).forEach(([k,v]) => z.setAttribute(k,v));
+      if (content!==undefined) z.textContent=content;
+      svg.append(z);
+      return z;
+    };
+
+    for (let i=0;i<5;i++) {
+      const v = low+(high-low)*i/4;
+      node('line',{x1:L,y1:y(v),x2:W-R,y2:y(v),class:'chart-grid'});
+      node('text',{
+        x:L-6,y:y(v)+4,'text-anchor':'end',class:'chart-label'
+      },v.toFixed(1));
     }
 
-    const name = task.items[index][0];
+    const path = shown.map(([d,v],i) =>
+      `${i?'L':'M'}${x(dates[i]).toFixed(1)},${y(Number(v)).toFixed(1)}`
+    ).join(' ');
 
-    if (!confirm("确定只删除「" + name + "」吗？")) {
-      return;
+    if (shown.length>1) {
+      node('path',{
+        d:path,fill:'none',stroke:'#20a87c','stroke-width':3,
+        'stroke-linecap':'round','stroke-linejoin':'round'
+      });
     }
 
-    backupForUndo();
-
-    // 只删除数组中指定位置的一个元素
-    task.items.splice(index, 1);
-
-    // 兼容旧版按序号保存的打卡记录
-    // 删除中间子任务后，将后面的勾选状态向前移动
-    Object.values(state).forEach(day => {
-      const record = day?.[task.id];
-      if (!record || typeof record !== "object") return;
-
-      const oldLength = task.items.length + 1;
-
-      for (let i = index; i < oldLength - 1; i++) {
-        const next = Object.prototype.hasOwnProperty.call(
-          record, String(i + 1)
-        ) ? record[i + 1] : false;
-
-        record[i] = next;
-      }
-
-      delete record[oldLength - 1];
+    shown.forEach(([d,v],i) => {
+      const c = node('circle',{
+        cx:x(dates[i]),cy:y(Number(v)),r:4.5,class:'weight-dot'
+      });
+      const title = document.createElementNS(ns,'title');
+      title.textContent = `${d}：${Number(v).toFixed(1)} kg`;
+      c.append(title);
     });
 
-    save();
-    saveEditorChanges();
-    renderEditor();
+    node('text',{
+      x:x(minX),y:H-10,
+      'text-anchor':minX===maxX?'middle':'start',class:'chart-label'
+    },shown[0][0].slice(5));
+
+    if (shown.length>1) {
+      node('text',{
+        x:x(maxX),y:H-10,'text-anchor':'end',class:'chart-label'
+      },shown.at(-1)[0].slice(5));
+    }
+
+    target.append(svg);
   }
 
-  function undoLastDeletion() {
-    if (!lastDeleted) return;
+  const list = $('weightList');
+  list.innerHTML = '';
 
-    TASKS = JSON.parse(JSON.stringify(lastDeleted.tasks));
-    state = JSON.parse(JSON.stringify(lastDeleted.records));
+  if (!entries.length) {
+    list.innerHTML = '<p class="small">还没有体重记录。</p>';
+  } else {
+    entries.slice().reverse().forEach(([d,v]) => {
+      const row = document.createElement('div');
+      row.className = 'weight-item';
 
-    lastDeleted = null;
+      const tx = document.createElement('span');
+      tx.textContent = `${d}  ·  ${Number(v).toFixed(1)} kg`;
 
-    save();
-    saveEditorChanges();
-    renderEditor();
+      const b = document.createElement('button');
+      b.textContent = '删除';
+      b.onclick = () => {
+        if (confirm('删除 '+d+' 的体重记录？')) {
+          delete weights[d];
+          saveWeights();
+          renderWeight();
+        }
+      };
+
+      row.append(tx,b);
+      list.append(row);
+    });
+  }
+}
+
+$('weightDate').value = iso(today);
+$('weightDate').max = iso(today);
+
+$('saveWeight').onclick = () => {
+  const date = $('weightDate').value;
+  const val = Number($('weightValue').value);
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date>iso(today)) {
+    alert('请选择今天或之前的有效日期');
+    return;
   }
 
-  function makeButton(text, handler, danger = false) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = danger ? "edit-btn danger" : "edit-btn";
-    button.textContent = text;
-    button.addEventListener("click", handler);
-    return button;
+  if (!$('weightValue').value.trim() ||
+      !Number.isFinite(val) || val<15 || val>400) {
+    alert('请输入15～400之间的有效体重（kg）');
+    return;
   }
 
-  // 覆盖旧版编辑器，确保每个按钮操作独立
-  renderEditor = function () {
-    ensureUniqueTaskIds();
+  weights[date] = Math.round(val*10)/10;
+  saveWeights();
+  $('weightValue').value = '';
+  renderWeight();
+};
 
-    const host = document.getElementById("editorList");
+$('weightRange').onchange = renderWeight;
+
+// 按日期保存独立任务清单。
+(() => {
+  const KEY = 'daily_growth_day_tasks_v1';
+
+  const valid = list => Array.isArray(list) &&
+    list.every(t => t && typeof t.id === 'string' &&
+      Array.isArray(t.items) &&
+      t.items.every(it => Array.isArray(it) && typeof it[2] === 'string')) &&
+    new Set(list.map(t => t.id)).size === list.length &&
+    list.every(t => new Set(t.items.map(it => it[2])).size === t.items.length);
+
+  let daily = {};
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+      for (const [date,list] of Object.entries(saved)) {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(date) && valid(list)) {
+          daily[date] = list;
+        }
+      }
+    }
+  } catch(e) {
+    console.error(e);
+  }
+
+  window.dailyGrowthDayTasks = daily;
+
+  const persist = () => {
+    localStorage.setItem(KEY,JSON.stringify(daily));
+    localStorage.setItem('daily_growth_tasks_v2',JSON.stringify(TASKS));
+  };
+
+  const ensure = date => {
+    if (!Object.prototype.hasOwnProperty.call(daily,date)) {
+      daily[date] = clone(TASKS);
+      persist();
+    }
+    return daily[date];
+  };
+
+  // 升级时为所有已有记录的日期保存独立清单。
+  Object.keys(state)
+    .filter(s => /^\d{4}-\d{2}-\d{2}$/.test(s))
+    .forEach(ensure);
+
+  persist();
+
+  const originalRenderDay = renderDay;
+
+  renderDay = function() {
+    ensure(iso(viewed));
+    originalRenderDay();
+
+    if (!$('editor').classList.contains('hidden')) {
+      renderEditor();
+    }
+  };
+
+  const button = (text,click,danger=false) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'edit-btn' + (danger?' danger':'');
+    b.textContent = text;
+    b.onclick = click;
+    return b;
+  };
+
+  const changed = () => {
+    persist();
+    renderDay();
+  };
+
+  renderEditor = function() {
+    const date = iso(viewed);
+    const list = ensure(date);
+    const host = $('editorList');
+
     host.replaceChildren();
 
-    const tip = document.createElement("p");
-    tip.className = "settings-tip";
-    tip.textContent =
-      "每次仅修改或删除选中的项目，其他任务保持不变。";
+    const tip = document.createElement('p');
+    tip.className = 'settings-tip';
+    tip.textContent = '正在编辑 '+date+'。只修改这一天的清单，其他日期不变。';
     host.append(tip);
 
-    if (lastDeleted) {
-      const undo = makeButton(
-        "↶ 撤销上一次删除",
-        undoLastDeletion
-      );
-      undo.style.marginBottom = "12px";
-      host.append(undo);
-    }
+    list.forEach(task => {
+      const card = document.createElement('div');
+      card.className = 'editor-card';
 
-    TASKS.forEach(task => {
-      const card = document.createElement("div");
-      card.className = "editor-card";
+      const heading = document.createElement('div');
+      heading.className = 'section-row';
 
-      const heading = document.createElement("div");
-      heading.className = "section-row";
+      const title = document.createElement('strong');
+      title.textContent = task.icon+' '+task.title;
 
-      const title = document.createElement("strong");
-      title.textContent = task.icon + " " + task.title;
+      // 所有任务都允许删除，包括运动。
+      const remove = button('删除任务',() => {
+        if (!confirm('只删除 '+date+' 的「'+task.title+'」？')) return;
 
-      const deleteTask = makeButton(
-        "删除任务",
-        () => {
-          const index = TASKS.indexOf(task);
-          if (index < 0) return;
+        const index = list.indexOf(task);
+        if (index<0) return;
 
-          if (task.id === "exercise") {
-            alert("运动是每日必做任务，不能删除");
-            return;
-          }
+        list.splice(index,1);
+        changed();
+      },true);
 
-          if (!confirm(
-            "确定只删除任务「" + task.title + "」吗？"
-          )) return;
-
-          backupForUndo();
-          TASKS.splice(index, 1);
-          saveEditorChanges();
-          renderEditor();
-        },
-        true
-      );
-
-      deleteTask.disabled = task.id === "exercise";
-      heading.append(title, deleteTask);
+      heading.append(title,remove);
       card.append(heading);
 
-      const taskName = document.createElement("input");
-      taskName.className = "editor-field";
-      taskName.value = task.title;
-      taskName.placeholder = "任务名称";
+      const name = document.createElement('input');
+      name.className = 'editor-field';
+      name.value = task.title;
+      name.setAttribute('aria-label','任务名称');
 
-      taskName.addEventListener("change", () => {
-        if (!TASKS.includes(task)) return;
+      name.onchange = () => {
+        task.title = name.value.trim() || task.title;
+        changed();
+      };
 
-        const value = taskName.value.trim();
-        if (!value) {
-          taskName.value = task.title;
-          return;
-        }
-
-        task.title = value;
-        title.textContent = task.icon + " " + task.title;
-        saveEditorChanges();
-      });
-
-      card.append(taskName);
+      card.append(name);
 
       task.items.forEach(item => {
-        const row = document.createElement("div");
-        row.className = "editor-row";
+        const row = document.createElement('div');
+        row.className = 'editor-row';
 
-        const input = document.createElement("input");
+        const input = document.createElement('input');
         input.value = item[0];
-        input.placeholder = "子任务名称";
+        input.setAttribute('aria-label','子任务名称');
 
-        input.addEventListener("change", () => {
-          if (!TASKS.includes(task)) return;
-          if (!task.items.includes(item)) return;
+        input.onchange = () => {
+          item[0] = input.value.trim() || item[0];
+          changed();
+        };
 
-          const value = input.value.trim();
-          if (!value) {
-            input.value = item[0];
-            return;
-          }
+        // 不限制剩余数量，可以删除最后一条子任务。
+        const del = button('删除',() => {
+          if (!confirm('只删除 '+date+' 的「'+item[0]+'」？')) return;
 
-          // 精确修改当前子任务
-          item[0] = value;
-          saveEditorChanges();
-        });
+          const index = task.items.indexOf(item);
+          if (index<0) return;
 
-        const deleteItem = makeButton(
-          "删除",
-          () => {
-            if (!TASKS.includes(task)) return;
+          task.items.splice(index,1);
+          changed();
+        },true);
 
-            // 使用元素身份定位，而不是旧的循环序号
-            const index = task.items.indexOf(item);
-            removeOneSubtask(task, index);
-          },
-          true
-        );
-
-        deleteItem.disabled = task.items.length <= 1;
-
-        row.append(input, deleteItem);
+        row.append(input,del);
         card.append(row);
       });
 
-      const addItem = makeButton(
-        "＋ 添加子任务",
-        () => {
-          if (!TASKS.includes(task)) return;
+      card.append(button('＋ 添加子任务',() => {
+        task.items.push(['新子任务',0,newItemId()]);
+        changed();
+      }));
 
-          // 创建独立数组，不复用已有子任务
-          task.items.push(["新子任务", 0, createId()]);
-          saveEditorChanges();
-          renderEditor();
-        }
-      );
-
-      card.append(addItem);
       host.append(card);
     });
   };
 
-  // 替换旧版添加任务按钮的行为
-  document.getElementById("addTask").onclick = () => {
-    TASKS.push({
-      id: createId(),
-      title: "新任务",
-      icon: "⭐",
-      items: [["第一项", 0, createId()]]
-    });
+  $('editor').querySelector('.settings-tip').textContent =
+    '更改自动保存，仅对正在查看的日期生效。修改名称不会改变勾选状态；添加或删除只作用于选中的项目。';
 
-    saveEditorChanges();
-    renderEditor();
+  $('addTask').onclick = () => {
+    ensure(iso(viewed)).push({
+      id:'custom_'+newItemId(),
+      title:'新任务',
+      icon:'⭐',
+      items:[['第一项',0,newItemId()]]
+    });
+    changed();
   };
 
-  ensureUniqueTaskIds();
-  saveEditorChanges();
+  $('export').onclick = () => {
+    const blob = new Blob([JSON.stringify({
+      app:'daily-growth',
+      version:5,
+      exportedAt:new Date().toISOString(),
+      records:state,
+      tasks:TASKS,
+      dayTasks:daily,
+      weights
+    },null,2)],{type:'application/json'});
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '每日成长备份-'+iso(today)+'.json';
+    a.click();
+
+    setTimeout(() => URL.revokeObjectURL(url),1000);
+  };
+
+  $('importFile').onchange = async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const obj = JSON.parse(await file.text());
+
+      if (obj.app!=='daily-growth' ||
+          ![1,2,3,4,5].includes(obj.version) ||
+          !obj.records ||
+          typeof obj.records!=='object' ||
+          Array.isArray(obj.records)) {
+        throw Error('文件格式不正确');
+      }
+
+      if (obj.version===5 &&
+          (!obj.dayTasks ||
+           typeof obj.dayTasks!=='object' ||
+           Array.isArray(obj.dayTasks) ||
+           Object.values(obj.dayTasks).some(list => !valid(list)))) {
+        throw Error('每日任务清单格式不正确');
+      }
+
+      if (!confirm('导入备份将覆盖当前数据，是否继续？')) return;
+
+      if (Array.isArray(obj.tasks) &&
+          obj.tasks.some(t => t.id==='exercise')) {
+        TASKS = clone(obj.tasks);
+        normalizeTasks();
+      }
+
+      state = clone(obj.records);
+      daily = obj.version===5 ? clone(obj.dayTasks) : {};
+      window.dailyGrowthDayTasks = daily;
+
+      if (obj.version!==5) migrateRecords(state);
+
+      Object.keys(state)
+        .filter(s => /^\d{4}-\d{2}-\d{2}$/.test(s))
+        .forEach(ensure);
+
+      weights = obj.weights &&
+        typeof obj.weights==='object' &&
+        !Array.isArray(obj.weights)
+        ? clone(obj.weights) : {};
+
+      persist();
+      save();
+      saveWeights();
+
+      renderDay();
+      renderHistory();
+      renderWeight();
+
+      alert('导入成功');
+    } catch(err) {
+      alert('导入失败：'+err.message);
+    } finally {
+      e.target.value = '';
+    }
+  };
+
+  renderDay();
 })();
 
-</script></body></html>
+if ('serviceWorker' in navigator && location.protocol==='https:') {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
